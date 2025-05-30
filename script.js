@@ -31,8 +31,8 @@ document.getElementById('generateBtn').onclick = async () => {
   }
 
   zip.generateAsync({ type: 'blob' }).then(content => {
-    saveAs(content, 'minecraft_27_skins.zip');
-    document.getElementById('status').textContent = '✅ Skins generated successfully!';
+    saveAs(content, 'namemc_skinart.zip');
+    document.getElementById('status').textContent = 'Skins generated successfully!';
   });
 };
 
