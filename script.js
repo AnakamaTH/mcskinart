@@ -7,13 +7,7 @@ document.getElementById('generateBtn').onclick = async () => {
     return;
   }
 
-  let baseImg;
-  if (baseFile) {
-    baseImg = await loadImage(baseFile);
-  } else {
-    baseImg = createBlankSkin(64, 64); // default blank base skin
-  }
-
+  const baseImg = baseFile ? await loadImage(baseFile) : await createBlankSkin(64, 64);
   const mapImg = await loadImage(mapFile);
   const resizedMap = await resizeImage(mapImg, 72, 24);
   const zip = new JSZip();
@@ -59,12 +53,14 @@ function resizeImage(img, width, height) {
 }
 
 function createBlankSkin(width, height) {
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, width, height); // transparent base
-  const img = new Image();
-  img.src = canvas.toDataURL();
-  return img;
+  return new Promise(resolve => {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, width, height); // transparent blank
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.src = canvas.toDataURL();
+  });
 }
