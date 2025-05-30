@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minecraft Skin Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Minecraft Skin Generator</h1>
+
+    <label>Upload Your Base Skin (64x64):</label>
+    <input type="file" id="baseSkinInput" accept="image/png"><br><br>
+
+    <label>Upload a Map Image (Any size):</label>
+    <input type="file" id="mapInput" accept="image/*"><br><br>
+
+    <button id="generateBtn">Generate 27 Skins</button>
+
+    <div id="status"></div>
+  </div>
+
+  <script src="libs/jszip.min.js"></script>
+  <script src="libs/FileSaver.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
