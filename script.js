@@ -2,14 +2,19 @@ document.getElementById('generateBtn').onclick = async () => {
   const baseFile = document.getElementById('baseSkinInput').files[0];
   const mapFile = document.getElementById('mapInput').files[0];
 
-  if (!baseFile || !mapFile) {
-    alert("Please upload both your base skin and a map image!");
+  if (!mapFile) {
+    alert("Please upload a map image!");
     return;
   }
 
-  const baseImg = await loadImage(baseFile);
-  const mapImg = await loadImage(mapFile);
+  let baseImg;
+  if (baseFile) {
+    baseImg = await loadImage(baseFile);
+  } else {
+    baseImg = createBlankSkin(64, 64); // default blank base skin
+  }
 
+  const mapImg = await loadImage(mapFile);
   const resizedMap = await resizeImage(mapImg, 72, 24);
   const zip = new JSZip();
 
@@ -51,4 +56,15 @@ function resizeImage(img, width, height) {
   const ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0, width, height);
   return Promise.resolve(canvas);
+}
+
+function createBlankSkin(width, height) {
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, width, height); // transparent base
+  const img = new Image();
+  img.src = canvas.toDataURL();
+  return img;
 }
