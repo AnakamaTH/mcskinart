@@ -1,34 +1,107 @@
+/* General body style */
 body {
-  background: linear-gradient(#111, #333);
-  color: white;
+  background: linear-gradient(to bottom, #111, #222);
+  color: #f0f0f0;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
   padding: 2em;
+  margin: 0;
 }
 
+/* Main container box */
 .container {
-  background: #222;
-  padding: 2em;
-  border-radius: 12px;
-  max-width: 600px;
-  margin: auto;
-  box-shadow: 0 0 20px #00ffff44;
+  background: #1a1a1a;
+  padding: 2em 2.5em;
+  border-radius: 16px;
+  max-width: 700px;
+  margin: 2em auto;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  transition: transform 0.2s ease;
 }
 
-input, button {
-  margin: 10px;
-  padding: 10px;
-  border-radius: 8px;
+.container:hover {
+  transform: scale(1.01);
+}
+
+/* Headings */
+h1, h2 {
+  color: #00ccff;
+  margin-bottom: 1em;
+}
+
+/* Inputs and buttons */
+input[type="file"], button {
+  display: block;
+  margin: 1em auto;
+  padding: 12px 20px;
+  border-radius: 10px;
   border: none;
+  font-size: 1em;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
+input[type="file"] {
+  background: #333;
+  color: #ccc;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  background: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #008ecc;
+}
+
+/* Action buttons */
 button {
   background: #00ccff;
-  color: black;
+  color: #000;
   font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 0 8px #00ccff88;
 }
 
 button:hover {
   background: #00aaff;
+  box-shadow: 0 0 12px #00ccffcc;
+}
+
+/* Status box */
+#status {
+  margin-top: 20px;
+  font-size: 0.95em;
+  color: #88f0ff;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 60px;
+}
+
+/* Usage list */
+#usage ol {
+  text-align: left;
+  padding-left: 1.5em;
+  line-height: 1.7;
+}
+
+#usage a {
+  color: #0cf;
+  text-decoration: none;
+}
+
+#usage a:hover {
+  text-decoration: underline;
 }
