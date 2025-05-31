@@ -1,3 +1,9 @@
+window.addEventListener('DOMContentLoaded', () => {
+  // Clear any selected files on page load
+  const fileInputs = document.querySelectorAll('input[type="file"]');
+  fileInputs.forEach(input => input.value = '');
+});
+
 // Updated random GIF backgrounds (with one removed)
 const gifs = [
   "https://pa1.aminoapps.com/5845/5749d2581b8ff83d442fbee9935fcbc5f0715067_hq.gif",
