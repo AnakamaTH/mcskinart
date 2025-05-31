@@ -19,14 +19,17 @@ document.getElementById('generateBtn').onclick = async () => {
     const ctx = canvas.getContext('2d');
 
     ctx.drawImage(baseImg, 0, 0);
+
     const sx = (i % 9) * 8;
     const sy = Math.floor(i / 9) * 8;
     const face = resizedMap.getContext('2d').getImageData(sx, sy, 8, 8);
     ctx.putImageData(face, 8, 8);
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-    const skinIndex = 27 - i;
-    const name = i === 0 ? 'optional_skin.png' : `skin_${skinIndex}.png`;
+    
+    // Name skins from 27 down to 1, except last is optional_skin.png
+    const name = i === 26 ? 'optional_skin.png' : `skin_${27 - i}.png`;
+
     zip.file(name, blob);
   }
 
@@ -35,33 +38,3 @@ document.getElementById('generateBtn').onclick = async () => {
     document.getElementById('status').textContent = 'Skins generated successfully!';
   });
 };
-
-function loadImage(file) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.src = URL.createObjectURL(file);
-  });
-}
-
-function resizeImage(img, width, height) {
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0, width, height);
-  return Promise.resolve(canvas);
-}
-
-function createBlankSkin(width, height) {
-  return new Promise(resolve => {
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, width, height); // transparent blank
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.src = canvas.toDataURL();
-  });
-}
