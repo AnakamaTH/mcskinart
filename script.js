@@ -1,10 +1,24 @@
+document.getElementById('mapInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) {
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.width = 72;
+    img.height = 24;
+    img.style.imageRendering = 'pixelated';
+
+    const preview = document.getElementById('mapPreview');
+    preview.innerHTML = '';
+    preview.appendChild(img);
+  }
+});
+
 document.getElementById('generateBtn').onclick = async () => {
   const baseFile = document.getElementById('baseSkinInput').files[0];
   const mapFile = document.getElementById('mapInput').files[0];
-  const status = document.getElementById('status');
 
   if (!mapFile) {
-    status.textContent = "Please upload a map image!";
+    alert("Please upload a map image!");
     return;
   }
 
@@ -59,6 +73,6 @@ document.getElementById('generateBtn').onclick = async () => {
 
   zip.generateAsync({ type: 'blob' }).then(content => {
     saveAs(content, 'namemc_skinart.zip');
-    status.textContent = 'Skins generated successfully!';
+    document.getElementById('status').textContent = 'Skins generated successfully!';
   });
 };
