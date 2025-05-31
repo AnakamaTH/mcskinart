@@ -18,6 +18,7 @@
 
   <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+  
   <style>
     body, html {
       margin: 0; padding: 0; height: 100%;
@@ -42,7 +43,6 @@
       border-radius: 16px;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
     }
-    /* rest of your styles */
   </style>
 </head>
 <body>
@@ -73,7 +73,7 @@
       <li>Click "Generate" to create 27 Minecraft skins.</li>
       <li>
         Equip skins <strong>from skin_1 to skin_26</strong> via the
-        <a href="https://www.minecraft.net/en-us/msaprofile/mygames/editskin" target="_blank">Minecraft website</a>.
+        <a href="https://www.minecraft.net/en-us/msaprofile/mygames/editskin" target="_blank" rel="noopener noreferrer">Minecraft website</a>.
       </li>
       <li>Wait until the skin shows on NameMC before uploading the next one!</li>
     </ol>
@@ -82,6 +82,9 @@
   <footer class="container">
     Not affiliated with NameMC.
   </footer>
+
+  <!-- OrbitControls script must come after three.min.js -->
+  <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
 
   <script>
     // Setup Three.js panorama cube
@@ -94,9 +97,9 @@
       0.1,
       1000
     );
-    camera.position.set(0, 0, 0.1);
+    camera.position.set(0, 0, 0.1); // Slightly inside the cube
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
 
@@ -108,42 +111,33 @@
       './assets/panorama_2.png', // top (+Y)
       './assets/panorama_3.png', // bottom (-Y)
       './assets/panorama_4.png', // front (+Z)
-      './assets/panorama_5.png', // back (-Z)
+      './assets/panorama_5.png'  // back (-Z)
     ];
     const cubeTexture = loader.load(urls);
     scene.background = cubeTexture;
 
-    // Optional: orbit controls for user to look around
-    let controls;
-    if (THREE.OrbitControls) {
-      controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enableZoom = false;
-      controls.enablePan = false;
-      controls.minPolarAngle = 0;
-      controls.maxPolarAngle = Math.PI;
-    } else {
-      // If no OrbitControls, you can add simple rotation animation below
-    }
+    // Setup OrbitControls for user interaction
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    controls.minPolarAngle = 0;
+    controls.maxPolarAngle = Math.PI;
+    controls.rotateSpeed = 0.4;
 
-    // Animation loop
-    function animate() {
-      requestAnimationFrame(animate);
-      // Optional slow rotation
-      // scene.rotation.y += 0.001;
-      if (controls) controls.update();
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Handle resize
+    // Resize handler
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
-  </script>
 
-  <!-- Add OrbitControls if needed -->
-  <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
+    // Animate loop
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
 </body>
 </html>
