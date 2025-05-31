@@ -133,9 +133,9 @@
 
         const content = await zip.generateAsync({ type: 'blob' });
         saveAs(content, 'namemc_skinart.zip');
-        status.textContent = '✅ Skins generated successfully!';
+        status.textContent = 'Skins generated successfully!';
       } catch (err) {
-        status.textContent = '❌ Error: ' + err;
+        status.textContent = 'Error: ' + err;
       }
     };
   </script>
