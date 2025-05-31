@@ -1,33 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>NameMC SkinArt Generator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://s.namemc.com/img/favicon-30.png">
+  <link rel="icon" type="image/png" href="https://s.namemc.com/img/favicon-30.png" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="NameMC SkinArt Generator">
-  <meta property="og:description" content="Generate a NameMC skinart with a picture you choose.">
-  <meta property="og:image" content="https://s.namemc.com/img/favicon-30.png">
-  <meta property="og:url" content="https://anakamath.github.io/mcskinart/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="NameMC SkinArt Generator">
+  <meta property="og:title" content="NameMC SkinArt Generator" />
+  <meta property="og:description" content="Generate a NameMC skinart with a picture you choose." />
+  <meta property="og:image" content="https://s.namemc.com/img/favicon-30.png" />
+  <meta property="og:url" content="https://anakamath.github.io/mcskinart/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NameMC SkinArt Generator" />
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: #eee;
+    }
+    #three-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1; /* behind your content */
+    }
+    .container {
+      position: relative;
+      max-width: 700px;
+      margin: 2em auto;
+      background: #1a1a1acc;
+      padding: 2em 2.5em;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+    }
+    /* rest of your styles */
+  </style>
 </head>
 <body>
+
+  <!-- Container for Three.js WebGL output -->
+  <div id="three-container"></div>
+
+  <!-- Your page content -->
   <div class="container">
     <h1>NameMC SkinArt Generator</h1>
 
     <label>Upload Your Base Skin (64x64):</label>
-    <input type="file" id="baseSkinInput" accept="image/png">
+    <input type="file" id="baseSkinInput" accept="image/png" />
 
     <label>Upload a Map Image (Any size):</label>
-    <input type="file" id="mapInput" accept="image/*">
+    <input type="file" id="mapInput" accept="image/*" />
 
     <button id="generateBtn">Generate</button>
 
@@ -40,14 +71,79 @@
       <li>Upload your base skin (optional, 64×64 PNG).</li>
       <li>Upload your map image (art). It will be resized to 72×24 if needed.</li>
       <li>Click "Generate" to create 27 Minecraft skins.</li>
-      <li>Equip skins <strong>from skin_1 to skin_26</strong> via the 
+      <li>
+        Equip skins <strong>from skin_1 to skin_26</strong> via the
         <a href="https://www.minecraft.net/en-us/msaprofile/mygames/editskin" target="_blank">Minecraft website</a>.
       </li>
       <li>Wait until the skin shows on NameMC before uploading the next one!</li>
     </ol>
   </div>
-  <footer>
+
+  <footer class="container">
     Not affiliated with NameMC.
-	<footer>
+  </footer>
+
+  <script>
+    // Setup Three.js panorama cube
+    const container = document.getElementById('three-container');
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    camera.position.set(0, 0, 0.1);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    container.appendChild(renderer.domElement);
+
+    // Load cube textures (panorama_0 to panorama_5)
+    const loader = new THREE.CubeTextureLoader();
+    const urls = [
+      './assets/panorama_0.png', // right (+X)
+      './assets/panorama_1.png', // left (-X)
+      './assets/panorama_2.png', // top (+Y)
+      './assets/panorama_3.png', // bottom (-Y)
+      './assets/panorama_4.png', // front (+Z)
+      './assets/panorama_5.png', // back (-Z)
+    ];
+    const cubeTexture = loader.load(urls);
+    scene.background = cubeTexture;
+
+    // Optional: orbit controls for user to look around
+    let controls;
+    if (THREE.OrbitControls) {
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableZoom = false;
+      controls.enablePan = false;
+      controls.minPolarAngle = 0;
+      controls.maxPolarAngle = Math.PI;
+    } else {
+      // If no OrbitControls, you can add simple rotation animation below
+    }
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      // Optional slow rotation
+      // scene.rotation.y += 0.001;
+      if (controls) controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+
+  <!-- Add OrbitControls if needed -->
+  <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
 </body>
 </html>
