@@ -5,53 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NameMC SkinArt Generator</title>
 
-  <!-- Discord Embed -->
-  <meta property="og:title" content="NameMC SkinArt Generator" />
-  <meta property="og:description" content="Generate a NameMC skinart." />
-  <meta property="og:image" content="https://s.namemc.com/img/favicon-30.png" />
-  <meta property="og:url" content="https://anakamath.github.io/mcskinart/" />
+  <!-- Discord & Embed -->
+  <meta property="og:title" content="NameMC SkinArt Generator">
+  <meta property="og:description" content="Generate a NameMC skinart.">
+  <meta property="og:image" content="https://s.namemc.com/img/favicon-30.png">
+  <meta property="og:url" content="https://anakamath.github.io/mcskinart/">
 
-  <!-- Font & Favicon -->
-  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="https://s.namemc.com/img/favicon-30.png" />
+  <!-- Font & Icon -->
+  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+  <link rel="icon" href="https://s.namemc.com/img/favicon-30.png">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Libraries -->
+  <!-- Styles & Scripts -->
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 <body>
-  <div class="overlay">
-    <div class="container">
-      <h1>NameMC SkinArt Generator</h1>
+  <div class="container">
+    <h1>NameMC SkinArt Generator</h1>
 
-      <label>Base Skin (64x64 PNG):</label>
-      <input type="file" id="baseSkinInput" accept="image/png" />
+    <label>Base Skin (optional, 64x64 PNG)</label>
+    <input type="file" id="baseSkinInput" accept="image/png">
 
-      <label>Map Image (72x24 PNG, 9×3 grid):</label>
-      <input type="file" id="mapInput" accept="image/png" />
-      <div id="mapPreview"></div>
+    <label>Map Image (72×24 PNG, 9x3 grid)</label>
+    <input type="file" id="mapInput" accept="image/png">
 
-      <button id="generateBtn">Generate Skins</button>
-      <div id="status"></div>
+    <img id="mapPreview" alt="Map Preview" />
 
-      <div class="usage">
-        <h2>📘 How to Use</h2>
-        <ol>
-          <li>Upload a base skin (optional).</li>
-          <li>Upload a 72×24 PNG map (9×3 grid of 8×8 heads).</li>
-          <li>Click “Generate Skins” to get a ZIP.</li>
-          <li>Equip from <strong>skin_27</strong> to <strong>skin_1</strong> on NameMC.</li>
-        </ol>
-      </div>
+    <button id="generateBtn">Generate Skins</button>
 
-      <footer>
-        Not affiliated with NameMC or Mojang.
-      </footer>
+    <div id="status"></div>
+
+    <div class="usage">
+      <h2>📘 How to Use</h2>
+      <ol>
+        <li>Upload a base skin (optional).</li>
+        <li>Upload a 72×24 map image (9×3 grid of 8×8 heads).</li>
+        <li>Click "Generate Skins" to download a ZIP file.</li>
+        <li>Equip from <strong>skin_27</strong> to <strong>skin_1</strong> in order.</li>
+      </ol>
     </div>
+
+    <footer>Not affiliated with NameMC or Mojang.</footer>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,21 +1,8 @@
-document.getElementById('mapInput').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (file) {
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(file);
-    img.width = 72;
-    img.height = 24;
-    img.style.imageRendering = 'pixelated';
-
-    const preview = document.getElementById('mapPreview');
-    preview.innerHTML = '';
-    preview.appendChild(img);
-  }
-});
-
 document.getElementById('generateBtn').onclick = async () => {
   const baseFile = document.getElementById('baseSkinInput').files[0];
   const mapFile = document.getElementById('mapInput').files[0];
+  const mapPreview = document.getElementById('mapPreview');
+  const status = document.getElementById('status');
 
   if (!mapFile) {
     alert("Please upload a map image!");
@@ -51,6 +38,10 @@ document.getElementById('generateBtn').onclick = async () => {
   const mapImg = resizeImage(await loadImage(mapFile), 72, 24);
   const mapCtx = mapImg.getContext('2d');
 
+  // Show map preview
+  mapPreview.src = mapImg.toDataURL();
+  mapPreview.style.display = 'block';
+
   const zip = new JSZip();
 
   for (let i = 0; i < 27; i++) {
@@ -67,12 +58,12 @@ document.getElementById('generateBtn').onclick = async () => {
     ctx.putImageData(face, 8, 8);
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-    const name = `skin_${i + 1}.png`;
-    zip.file(name, blob);
+    zip.file(`skin_${i + 1}.png`, blob);
   }
 
   zip.generateAsync({ type: 'blob' }).then(content => {
     saveAs(content, 'namemc_skinart.zip');
-    document.getElementById('status').textContent = 'Skins generated successfully!';
+    status.textContent = 'Skins generated successfully!';
+    status.style.color = 'limegreen';
   });
 };

@@ -1,73 +1,65 @@
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'Minecraftia', sans-serif;
-  background-image: url('assets/panorama_1.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  color: #fff;
-}
-
-.overlay {
-  background-color: rgba(0, 0, 0, 0.6);
-  min-height: 100vh;
-  padding: 30px;
-  box-sizing: border-box;
+  font-family: 'Minecraftia', monospace;
+  color: white;
+  background: url('assets/panorama_combined.png') center/cover no-repeat fixed;
 }
 
 .container {
-  max-width: 800px;
-  margin: auto;
-  background-color: #1d1d1d;
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 20px;
-  border: 2px solid #444;
-  border-radius: 10px;
+  margin: 50px auto;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #000;
 }
 
 h1 {
   text-align: center;
-  color: #00ff00;
+  margin-bottom: 20px;
 }
 
-label, .usage h2 {
+input[type="file"],
+button {
   display: block;
-  margin-top: 20px;
-  font-weight: bold;
-  color: #ffaa00;
-}
-
-input[type="file"] {
+  margin: 10px 0;
+  padding: 8px;
   width: 100%;
-  margin: 5px 0;
+  font-size: 14px;
 }
 
 button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-family: 'Minecraftia', sans-serif;
-  background-color: #00aa00;
+  background-color: #28a745;
   border: none;
   color: white;
   cursor: pointer;
+  font-weight: bold;
 }
 
-#status {
-  margin-top: 15px;
-  color: #00ff00;
+button:hover {
+  background-color: #218838;
 }
 
 #mapPreview {
+  display: none;
+  max-width: 100%;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+}
+
+#status {
+  text-align: center;
+  font-weight: bold;
   margin-top: 10px;
-  border: 1px solid #666;
-  width: 72px;
-  height: 24px;
-  image-rendering: pixelated;
+}
+
+.usage {
+  margin-top: 20px;
 }
 
 footer {
-  margin-top: 30px;
   text-align: center;
-  color: #aaa;
+  margin-top: 20px;
   font-size: 12px;
+  opacity: 0.7;
 }
