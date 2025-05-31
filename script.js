@@ -1,11 +1,12 @@
-// Random GIF backgrounds
+// Updated random GIF backgrounds (with one removed)
 const gifs = [
   "https://pa1.aminoapps.com/5845/5749d2581b8ff83d442fbee9935fcbc5f0715067_hq.gif",
   "https://pa1.aminoapps.com/5845/9cb2168430d3538abdda1ce6676bf3c37f517369_hq.gif",
   "https://pa1.aminoapps.com/5845/d6890eeb58a89ef075cdfbe7b940b231bec61a49_hq.gif",
   "https://pa1.aminoapps.com/5845/32c70e035bc4ac6802178e43be9066e445095bed_hq.gif",
-  "https://pm1.aminoapps.com/5845/992626a4a240f99676166c0404c980cc69736c21_hq.jpg"
+  "https://i.pinimg.com/originals/e5/a1/7e/e5a17eb79c5472b5fea8ab36282f3696.gif"
 ];
+
 document.querySelector(".overlay").style.backgroundImage = `url('${gifs[Math.floor(Math.random() * gifs.length)]}')`;
 
 document.getElementById('mapInput').addEventListener('change', function () {
