@@ -1,9 +1,12 @@
+<script>
 document.getElementById('generateBtn').onclick = async () => {
   const baseFile = document.getElementById('baseSkinInput').files[0];
   const mapFile = document.getElementById('mapInput').files[0];
+  const status = document.getElementById('status');
+  status.textContent = ''; // Reset status
 
   if (!mapFile) {
-    alert("Please upload a map image!");
+    alert("Please upload a 72×24 map image!");
     return;
   }
 
@@ -32,33 +35,42 @@ document.getElementById('generateBtn').onclick = async () => {
     return canvas;
   };
 
-  const baseImg = baseFile ? resizeImage(await loadImage(baseFile), 64, 64) : createBlankSkin();
-  const mapImg = resizeImage(await loadImage(mapFile), 72, 24);
-  const mapCtx = mapImg.getContext('2d');
+  try {
+    const baseImg = baseFile
+      ? resizeImage(await loadImage(baseFile), 64, 64)
+      : createBlankSkin();
 
-  const zip = new JSZip();
+    const mapImg = resizeImage(await loadImage(mapFile), 72, 24);
+    const mapCtx = mapImg.getContext('2d');
 
-  for (let i = 0; i < 27; i++) {
-    const canvas = document.createElement('canvas');
-    canvas.width = 64;
-    canvas.height = 64;
-    const ctx = canvas.getContext('2d');
+    const zip = new JSZip();
 
-    ctx.drawImage(baseImg, 0, 0);
+    for (let i = 0; i < 27; i++) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d');
 
-    const sx = (i % 9) * 8;
-    const sy = Math.floor(i / 9) * 8;
-    const face = mapCtx.getImageData(sx, sy, 8, 8);
-    ctx.putImageData(face, 8, 8);
+      ctx.drawImage(baseImg, 0, 0);
 
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-	const name = `skin_${i + 1}.png`;
+      const sx = (i % 9) * 8;
+      const sy = Math.floor(i / 9) * 8;
 
-    zip.file(name, blob);
-  }
+      // Copy 8x8 face
+      const face = mapCtx.getImageData(sx, sy, 8, 8);
+      ctx.putImageData(face, 8, 8); // Replace face at (8,8)
 
-  zip.generateAsync({ type: 'blob' }).then(content => {
+      // Optional preview skin for slot 27
+      const name = i === 26 ? 'optional_skin.png' : `skin_${i + 1}.png`;
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      zip.file(name, blob);
+    }
+
+    const content = await zip.generateAsync({ type: 'blob' });
     saveAs(content, 'namemc_skinart.zip');
-    document.getElementById('status').textContent = 'Skins generated successfully!';
-  });
+    status.textContent = 'Skins generated successfully!';
+  } catch (err) {
+    status.textContent = 'Error: ' + err;
+  }
 };
+</script>
