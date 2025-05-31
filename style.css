@@ -84,3 +84,12 @@ footer {
   font-size: 12px;
   opacity: 0.6;
 }
+
+body {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
