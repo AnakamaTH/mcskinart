@@ -21,3 +21,6 @@ The first 8x8 pixels will be saved as skin_27.png but its better not to use the 
 
 
 ![art](https://github.com/user-attachments/assets/406f21ba-7908-4795-9d0a-eea0bfb7e65e)
+
+**2) Use the website to upload your base skin and skinart or run the Windows Executable**
+![art2](https://github.com/user-attachments/assets/9c76760b-b808-46ef-8c7c-26c02a85e732)
