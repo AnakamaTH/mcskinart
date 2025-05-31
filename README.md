@@ -33,7 +33,8 @@ Each tile becomes a separate head layer for your Minecraft skin.
 
 Use the website to upload your **base skin** and **skinart image** directly.
 
-![art2](https://github.com/user-attachments/assets/9c76760b-b808-46ef-8c7c-26c02a85e732)
+![resim](https://github.com/user-attachments/assets/af5b4240-150b-435e-add8-c6c7960e0c6d)
+
 
 ---
 
