@@ -13,6 +13,8 @@ Turn any image into a set of Minecraft skins for creative NameMC art displays!
 ---
 
 ## 📸 How to Use
+[For Web Version](github.com/AnakamaTH/mcskinart/blob/main/README.md/#2-web-version)
+[For Windows Version](github.com/AnakamaTH/mcskinart/blob/main/README.md/#2-web-version)
 
 ### 1. Select a Picture for Your SkinArt
 
@@ -35,7 +37,7 @@ Use the website to upload your **base skin** and **skinart image** directly.
 
 ---
 
-### 🖥️ 3. Windows Version
+### 3. Windows Version
 
 Run the Windows app and select your `map.png` image (your art).  
 If it’s not **72×24**, it will be resized automatically.
