@@ -53,38 +53,6 @@
     Not affiliated with NameMC.
   </footer>
 
-  <script src="libs/jszip.min.js"></script>
-  <script src="libs/FileSaver.min.js"></script>
-  <script src="script.js"></script>
-  <script>
-    // Three.js skybox
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, 400);
-    document.getElementById("skyboxContainer").appendChild(renderer.domElement);
 
-    const loader = new THREE.TextureLoader();
-    const materials = [
-      new THREE.MeshBasicMaterial({ map: loader.load('assets/panorama_0.png'), side: THREE.BackSide }), // right
-      new THREE.MeshBasicMaterial({ map: loader.load('assets/panorama_1.png'), side: THREE.BackSide }), // left
-      new THREE.MeshBasicMaterial({ map: loader.load('assets/panorama_4.png'), side: THREE.BackSide }), // top
-      new THREE.MeshBasicMaterial({ map: loader.load('assets/panorama_5.png'), side: THREE.BackSide }), // bottom
-      new THREE.MeshBasicMaterial({ map: loader.load('assets/panorama_2.png'), side: THREE.BackSide }), // front
-      new THREE.MeshBasicMaterial({ map: loader.load('assets/panorama_3.png'), side: THREE.BackSide })  // back
-    ];
-
-    const skybox = new THREE.Mesh(new THREE.BoxGeometry(100, 100, 100), materials);
-    scene.add(skybox);
-
-    camera.position.z = 0.1;
-    function animate() {
-      requestAnimationFrame(animate);
-      skybox.rotation.y += 0.001;
-      skybox.rotation.x += 0.0005;
-      renderer.render(scene, camera);
-    }
-    animate();
-  </script>
 </body>
 </html>
