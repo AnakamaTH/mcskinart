@@ -1,4 +1,4 @@
-// Updated random GIF backgrounds (with one removed)
+
 const gifs = [
   "https://pa1.aminoapps.com/5845/5749d2581b8ff83d442fbee9935fcbc5f0715067_hq.gif",
   "https://pa1.aminoapps.com/5845/9cb2168430d3538abdda1ce6676bf3c37f517369_hq.gif",
@@ -8,13 +8,11 @@ const gifs = [
   "https://pa1.aminoapps.com/5845/aa86445c253d52c324bfa0ce378bb049253e7f01_hq.gif",
   "https://pa1.aminoapps.com/5845/3e279f21d4b8e146c8076013eb93613d441d1c4b_hq.gif",
   "https://i.pinimg.com/originals/99/f4/36/99f43636e89075b308a720bff365b132.gif",
-  "https://i.imgur.com/oXt4AAr.gif",
-  "https://i.imgur.com/0tisMv9.gif",
   "https://i.redd.it/r152bcq4zhv51.gif",
   "https://i.gifer.com/1toU.gif"
 ];
 
-document.querySelector(".overlay").style.backgroundImage = url('${gifs[Math.floor(Math.random() * gifs.length)]}');
+document.querySelector(".overlay").style.backgroundImage = `url('${gifs[Math.floor(Math.random() * gifs.length)]}')`;
 
 document.getElementById('mapInput').addEventListener('change', function () {
   const file = this.files[0];
@@ -80,7 +78,7 @@ document.getElementById('generateBtn').onclick = async () => {
     ctx.putImageData(face, 8, 8);
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-    const name = skin_${i + 1}.png;
+    const name = `skin_${i + 1}.png`;
     zip.file(name, blob);
   }
 
