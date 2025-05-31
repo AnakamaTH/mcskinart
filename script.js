@@ -1,9 +1,10 @@
 document.getElementById('generateBtn').onclick = async () => {
   const baseFile = document.getElementById('baseSkinInput').files[0];
   const mapFile = document.getElementById('mapInput').files[0];
+  const status = document.getElementById('status');
 
   if (!mapFile) {
-    alert("Please upload a map image!");
+    status.textContent = "Please upload a map image!";
     return;
   }
 
@@ -53,12 +54,11 @@ document.getElementById('generateBtn').onclick = async () => {
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
     const name = `skin_${i + 1}.png`;
-
     zip.file(name, blob);
   }
 
   zip.generateAsync({ type: 'blob' }).then(content => {
     saveAs(content, 'namemc_skinart.zip');
-    document.getElementById('status').textContent = 'Skins generated successfully!';
+    status.textContent = '✅ Skins generated successfully!';
   });
 };
