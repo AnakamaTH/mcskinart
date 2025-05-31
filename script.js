@@ -1,8 +1,25 @@
+const backgrounds = [
+  'https://pa1.aminoapps.com/5845/5749d2581b8ff83d442fbee9935fcbc5f0715067_hq.gif',
+  'https://pa1.aminoapps.com/5845/9cb2168430d3538abdda1ce6676bf3c37f517369_hq.gif',
+  'https://pa1.aminoapps.com/5845/d6890eeb58a89ef075cdfbe7b940b231bec61a49_hq.gif',
+  'https://pa1.aminoapps.com/5845/32c70e035bc4ac6802178e43be9066e445095bed_hq.gif',
+  'https://pm1.aminoapps.com/5845/992626a4a240f99676166c0404c980cc69736c21_hq.jpg'
+];
+
+document.body.style.backgroundImage = `url('${backgrounds[Math.floor(Math.random() * backgrounds.length)]}')`;
+
+document.getElementById('mapInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const url = URL.createObjectURL(file);
+    document.getElementById('mapPreview').src = url;
+  }
+});
+
 document.getElementById('generateBtn').onclick = async () => {
   const baseFile = document.getElementById('baseSkinInput').files[0];
   const mapFile = document.getElementById('mapInput').files[0];
-  const mapPreview = document.getElementById('mapPreview');
-  const status = document.getElementById('status');
+  const statusEl = document.getElementById('status');
 
   if (!mapFile) {
     alert("Please upload a map image!");
@@ -38,10 +55,6 @@ document.getElementById('generateBtn').onclick = async () => {
   const mapImg = resizeImage(await loadImage(mapFile), 72, 24);
   const mapCtx = mapImg.getContext('2d');
 
-  // Show map preview
-  mapPreview.src = mapImg.toDataURL();
-  mapPreview.style.display = 'block';
-
   const zip = new JSZip();
 
   for (let i = 0; i < 27; i++) {
@@ -51,7 +64,6 @@ document.getElementById('generateBtn').onclick = async () => {
     const ctx = canvas.getContext('2d');
 
     ctx.drawImage(baseImg, 0, 0);
-
     const sx = (i % 9) * 8;
     const sy = Math.floor(i / 9) * 8;
     const face = mapCtx.getImageData(sx, sy, 8, 8);
@@ -63,7 +75,7 @@ document.getElementById('generateBtn').onclick = async () => {
 
   zip.generateAsync({ type: 'blob' }).then(content => {
     saveAs(content, 'namemc_skinart.zip');
-    status.textContent = 'Skins generated successfully!';
-    status.style.color = 'limegreen';
+    statusEl.textContent = 'Skins generated successfully!';
+    statusEl.className = 'success';
   });
 };

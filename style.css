@@ -1,74 +1,76 @@
 body {
   margin: 0;
-  font-family: 'Minecraftia', monospace;
+  font-family: 'Minecraftia', sans-serif;
   color: white;
-  background: url('https://pa1.aminoapps.com/5845/aa86445c253d52c324bfa0ce378bb049253e7f01_hq.gif') no-repeat center center fixed;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .container {
-  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black for readability */
-  padding: 20px;
-  margin: 50px auto;
-  max-width: 520px;
+  max-width: 700px;
+  margin: auto;
+  padding: 2em;
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
-  box-shadow: 0 0 12px #000;
+  margin-top: 40px;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
-  margin-bottom: 20px;
 }
 
-input[type="file"],
-button {
+input[type="file"] {
   display: block;
-  margin: 10px 0;
-  padding: 8px;
-  width: 100%;
-  font-size: 14px;
+  margin: 10px 0 20px;
 }
 
 button {
-  background-color: #28a745;
-  border: none;
+  font-family: inherit;
+  font-size: 1em;
+  padding: 10px 20px;
+  background: #55aa55;
   color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
+  display: block;
+  margin: 20px auto;
 }
 
-button:hover {
-  background-color: #218838;
+#previewContainer {
+  text-align: center;
+  margin-top: 10px;
 }
 
 #mapPreview {
-  display: none;
   max-width: 100%;
-  margin: 10px 0;
-  border: 1px solid #ccc;
+  width: 300px;
+  height: auto;
+  border: 2px solid white;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
 #status {
   text-align: center;
+  margin-top: 15px;
   font-weight: bold;
-  margin-top: 10px;
 }
 
 #status.success {
-  color: #4CAF50;
-}
-
-#status.error {
-  color: #ff4444;
-}
-
-.usage {
-  margin-top: 20px;
+  color: #00ff00;
 }
 
 footer {
   text-align: center;
-  margin-top: 20px;
-  font-size: 12px;
+  font-size: 0.9em;
   opacity: 0.7;
+  margin-top: 40px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
