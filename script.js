@@ -1,17 +1,3 @@
-<form id="skinForm">
-  <input type="file" id="baseSkinInput" accept="image/png" />
-  <input type="file" id="mapInput" accept="image/png" />
-  <button type="button" id="generateBtn">Generate</button>
-</form>
-
-<img id="mapPreview" style="display:none; width:144px; height:48px; object-fit: contain; border: 2px solid #fff; margin-top: 1rem;" />
-
-<div id="status" style="margin-top: 1rem; font-weight: bold;"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.0/dist/jszip.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
-
-<script>
   // GIF backgrounds array
   const gifs = [
     "https://pa1.aminoapps.com/5845/5749d2581b8ff83d442fbee9935fcbc5f0715067_hq.gif",
