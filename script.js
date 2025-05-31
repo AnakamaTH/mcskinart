@@ -52,7 +52,8 @@ document.getElementById('generateBtn').onclick = async () => {
     ctx.putImageData(face, 8, 8);
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-    const name = i === 26 ? 'optional_skin.png' : `skin_${27 - i}.png`;
+	const name = `skin_${i + 1}.png`;
+
     zip.file(name, blob);
   }
 
