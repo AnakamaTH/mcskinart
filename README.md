@@ -1,6 +1,5 @@
 # NameMC SkinArt Generator
 
-
 # Features
 - Fast
 - Automatic image resizer
@@ -24,12 +23,12 @@ The first 8x8 pixels will be saved as skin_27.png but its better not to use the 
 
 
 ## Web
-**2) Use the website to upload your base skin and skinart or run the Windows Executable**
+**2) Use the website to upload your base skin and skinart.**
 ![art2](https://github.com/user-attachments/assets/9c76760b-b808-46ef-8c7c-26c02a85e732)
 
 
 ## Windows
-**2) Run the app and select your map image (also add a skin.png if you want)**
+**2) Run the app and select your map image (72x24, if bigger or smaller it will be resized), also add a skin.png if you want**
 
 ![win](https://github.com/user-attachments/assets/07e73b59-fd51-43af-9b2d-6771b183718e)
 
