@@ -18,5 +18,7 @@ Your image will be resized to a 72x24 pixel image
 The first 8x8 pixels will be saved as skin_27.png but its better not to use the first 8x8 pixels since it covers your normal skin.
 
 **Example**:
+
+
 ![skinart](https://github.com/user-attachments/assets/0e2df905-3f37-4a8b-9992-3d760f5192dd)
 
