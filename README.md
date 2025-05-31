@@ -8,7 +8,7 @@
 
 # How to use
 
-**1) Select a picture as your skinart**
+## **Select a picture as your skinart**
 Your image will be resized to a 72x24 pixel image
 The first 8x8 pixels will be saved as skin_27.png but its better not to use the first 8x8 pixels since it covers your normal skin.
 
@@ -20,7 +20,7 @@ The first 8x8 pixels will be saved as skin_27.png but its better not to use the 
 
 
 ## Web
-**2) Use the website to upload your base skin and skinart.**
+**Use the website to upload your base skin and skinart.**
 
 
 
@@ -29,7 +29,7 @@ The first 8x8 pixels will be saved as skin_27.png but its better not to use the 
 
 
 ## Windows
-**2) Run the app and select your map image (72x24, if bigger or smaller it will be resized), also add a skin.png if you want**
+**Run the app and select your map image (72x24, if bigger or smaller it will be resized), also add a skin.png if you want**
 
 ![win](https://github.com/user-attachments/assets/07e73b59-fd51-43af-9b2d-6771b183718e)
 
