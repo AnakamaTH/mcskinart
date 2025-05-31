@@ -20,9 +20,22 @@
   <input type="file" id="mapInput" accept="image/png">
 
   <br>
-  <button id="generateBtn">Generate Skins</button>
+  <button id="generateBtn">Generate</button>
+  <button id="usageBtn">Usage</button>
 
   <div id="status"></div>
+
+<script src="script.js"></script>
+<script>
+  document.getElementById('usageBtn').onclick = () => {
+    alert(`USAGE INSTRUCTIONS:\n
+1. Upload a base skin (optional).
+2. Upload a 72×24 PNG map image (9x3 grid of 8x8 faces).
+3. Click "Generate Skins" to download a ZIP with 27 skins.\n
+Slot 27 is an optional preview.
+Not affiliated with NameMC or Mojang.`);
+  };
+</script>
 
   <footer>
     Not affiliated with NameMC or Mojang.
