@@ -33,12 +33,12 @@ The first 8x8 pixels will be saved as skin_27.png but its better not to use the 
 
 ![win](https://github.com/user-attachments/assets/07e73b59-fd51-43af-9b2d-6771b183718e)
 
-
 ## **Final**
 - Equip all skins from skin 1 to skin 26
 - Use the [Minecraft Website](https://www.minecraft.net/en-us/msaprofile/mygames/editskin) while equiping skins. (NOT THE LAUNCHER)
 - Don't equip the next skin until you see the current one in NameMC.
+  
+**How it looks**
 
-**Example:**
   ![resim](https://github.com/user-attachments/assets/d1e33dd8-e10b-43dc-912c-a8ed77ef21d3)
 
