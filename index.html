@@ -5,49 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NameMC SkinArt Generator</title>
 
-  <!-- 🟣 Discord Embed -->
+  <!-- 🔹 Discord & Social Embed -->
   <meta property="og:title" content="NameMC SkinArt Generator">
-  <meta property="og:description" content="Generate NameMC skinart from custom maps.">
+  <meta property="og:description" content="Generate a NameMC skinart using a base skin and map image.">
   <meta property="og:image" content="https://s.namemc.com/img/favicon-30.png">
   <meta property="og:url" content="https://anakamath.github.io/mcskinart/">
 
-  <!-- 🟢 Fonts & Icons -->
-  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
-  <link rel="icon" type="image/png" href="https://s.namemc.com/img/favicon-30.png" />
-  <link rel="stylesheet" href="style.css">
+  <!-- 🔸 Favicon -->
+  <link rel="icon" href="https://s.namemc.com/img/favicon-30.png" />
 
-  <!-- 📦 Libraries -->
+  <!-- 🔷 Minecraft Font -->
+  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+
+  <!-- 🔹 CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- 🔸 JS Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 <body>
+  <div class="overlay"></div>
+
   <div class="container">
     <h1>NameMC SkinArt Generator</h1>
 
-    <label>Upload Your Base Skin (64x64 PNG):</label>
+    <label>Base Skin (optional, 64×64 PNG):</label>
     <input type="file" id="baseSkinInput" accept="image/png" />
 
-    <label>Upload Map Image (72x24 PNG, 9×3 grid):</label>
+    <label>Map Image (required, 72×24 PNG – 9×3 grid):</label>
     <input type="file" id="mapInput" accept="image/png" />
-    
-    <div id="previewContainer">
-      <p><strong>Map Preview:</strong></p>
-      <img id="mapPreview" src="" alt="Map preview will appear here">
-    </div>
+
+    <img id="mapPreview" src="" alt="Map Preview" />
 
     <button id="generateBtn">Generate Skins</button>
+
     <div id="status"></div>
 
-    <section class="usage">
+    <div class="usage">
       <h2>📘 How to Use</h2>
       <ol>
-        <li>Upload a base skin (optional, 64x64 PNG).</li>
-        <li>Upload a map image (72x24 PNG – 9x3 grid of 8x8 faces).</li>
-        <li>Click "Generate Skins" to download a ZIP file.</li>
-        <li>Equip from <strong>skin_27</strong> (preview) to <strong>skin_1</strong>.</li>
-        <li>Wait for NameMC to update each before the next.</li>
+        <li>Upload a base skin (optional).</li>
+        <li>Upload a map image (72x24 PNG – 9×3 grid).</li>
+        <li>Click <strong>Generate Skins</strong> to download a ZIP.</li>
+        <li>Equip skins from <strong>skin_27</strong> (preview) to <strong>skin_1</strong>.</li>
       </ol>
-    </section>
+    </div>
 
     <footer>
       Not affiliated with NameMC or Mojang.
