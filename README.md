@@ -14,7 +14,7 @@ Turn any image into a set of Minecraft skins for creative NameMC art displays!
 
 ## 📸 How to Use
 - [For Web Version](#2-web-version)
-- [For Windows Version](#%EF%B8%8F-3-windows-version)
+- [For Windows Version](#3-windows-version)
 
 ### 1. Select a Picture for Your SkinArt
 
