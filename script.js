@@ -12,7 +12,25 @@ const gifs = [
   "https://i.gifer.com/1toU.gif"
 ];
 
-document.querySelector(".overlay").style.backgroundImage = `url('${gifs[Math.floor(Math.random() * gifs.length)]}')`;
+// Shuffle helper
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Store shuffled list in sessionStorage
+if (!sessionStorage.getItem('gifQueue') || JSON.parse(sessionStorage.getItem('gifQueue')).length === 0) {
+  sessionStorage.setItem('gifQueue', JSON.stringify(shuffleArray([...gifs])));
+}
+
+const gifQueue = JSON.parse(sessionStorage.getItem('gifQueue'));
+const nextGif = gifQueue.shift();
+sessionStorage.setItem('gifQueue', JSON.stringify(gifQueue));
+document.querySelector(".overlay").style.backgroundImage = `url('${nextGif}')`;
+
 
 document.getElementById('mapInput').addEventListener('change', function () {
   const file = this.files[0];
