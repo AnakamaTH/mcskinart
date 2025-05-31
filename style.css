@@ -1,12 +1,14 @@
 /* General body style */
 body {
-  background: linear-gradient(to bottom, #111, #222);
+  background: url('https://static.planetminecraft.com/files/image/minecraft/texture-pack/2021/877/13869926-panorama.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: #f0f0f0;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
   padding: 2em;
   margin: 0;
 }
+
 
 /* Main container box */
 .container {
