@@ -18,7 +18,8 @@
 
   <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
-  
+  <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
+
   <style>
     body, html {
       margin: 0; padding: 0; height: 100%;
@@ -32,7 +33,7 @@
       top: 0; left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1; /* behind your content */
+      z-index: -1; /* behind content */
     }
     .container {
       position: relative;
@@ -42,24 +43,23 @@
       padding: 2em 2.5em;
       border-radius: 16px;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      z-index: 1;
     }
     footer.container {
       text-align: center;
       font-size: 0.9em;
-      color: #888;
-      margin-bottom: 2em;
-      box-shadow: none;
-      background: transparent;
-      padding: 1em 0;
+      opacity: 0.6;
+      margin: 2em auto 4em auto;
+      max-width: 700px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Container for Three.js WebGL output -->
+  <!-- Three.js background container -->
   <div id="three-container"></div>
 
-  <!-- Your page content -->
+  <!-- Main UI container -->
   <div class="container">
     <h1>NameMC SkinArt Generator</h1>
 
@@ -82,7 +82,7 @@
       <li>Click "Generate" to create 27 Minecraft skins.</li>
       <li>
         Equip skins <strong>from skin_1 to skin_26</strong> via the
-        <a href="https://www.minecraft.net/en-us/msaprofile/mygames/editskin" target="_blank" rel="noopener noreferrer">Minecraft website</a>.
+        <a href="https://www.minecraft.net/en-us/msaprofile/mygames/editskin" target="_blank" rel="noopener">Minecraft website</a>.
       </li>
       <li>Wait until the skin shows on NameMC before uploading the next one!</li>
     </ol>
@@ -92,14 +92,11 @@
     Not affiliated with NameMC.
   </footer>
 
-  <!-- OrbitControls script must come after three.min.js -->
-  <script src="https://unpkg.com/three@0.150.1/examples/js/controls/OrbitControls.js"></script>
-
   <script>
     // Setup Three.js panorama cube
     const container = document.getElementById('three-container');
-
     const scene = new THREE.Scene();
+
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -112,7 +109,8 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
 
-    // Load cube textures (panorama_0 to panorama_5)
+    // Cube texture loader: panorama images in correct order
+    // Order: px, nx, py, ny, pz, nz
     const loader = new THREE.CubeTextureLoader();
     const urls = [
       './assets/panorama_0.png', // right (+X)
@@ -122,46 +120,31 @@
       './assets/panorama_4.png', // front (+Z)
       './assets/panorama_5.png'  // back (-Z)
     ];
-    loader.load(urls, function (texture) {
-      // Instead of setting scene.background, create a large inside-out cube mesh
-      const shader = THREE.ShaderLib['cube'];
-      shader.uniforms['tCube'].value = texture;
 
-      const material = new THREE.ShaderMaterial({
-        fragmentShader: shader.fragmentShader,
-        vertexShader: shader.vertexShader,
-        uniforms: shader.uniforms,
-        depthWrite: false,
-        side: THREE.BackSide,
-      });
+    const cubeTexture = loader.load(urls);
+    scene.background = cubeTexture;
 
-      const geometry = new THREE.BoxGeometry(100, 100, 100);
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-    });
-
-    // Setup OrbitControls for user interaction
+    // OrbitControls allow you to look around panorama
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableZoom = false;
     controls.enablePan = false;
-    controls.minPolarAngle = 0;
-    controls.maxPolarAngle = Math.PI;
-    controls.rotateSpeed = 0.4;
+    controls.minPolarAngle = 0;          // look straight up
+    controls.maxPolarAngle = Math.PI;    // look straight down
 
-    // Resize handler
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // Animate loop
+    // Animation loop
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
     }
     animate();
+
+    // Handle window resizing
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
   </script>
 </body>
 </html>
