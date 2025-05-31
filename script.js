@@ -1,69 +1,67 @@
-const generateBtn = document.getElementById("generateBtn");
-const status = document.getElementById("status");
+document.getElementById('generateBtn').onclick = async () => {
+  const baseFile = document.getElementById('baseSkinInput').files[0];
+  const mapFile = document.getElementById('mapInput').files[0];
 
-generateBtn.addEventListener("click", async () => {
-  const baseSkinFile = document.getElementById("baseSkinInput").files[0];
-  const mapFile = document.getElementById("mapInput").files[0];
-
-  if (!baseSkinFile || !mapFile) {
-    alert("Please upload both a base skin and a map image.");
+  if (!mapFile) {
+    alert("Please upload a map image!");
     return;
   }
 
-  status.textContent = "Processing...";
-
-  const baseSkinImg = await loadImageFromFile(baseSkinFile);
-  const mapImg = await loadImageFromFile(mapFile);
-  const resizedMap = resizeImage(mapImg, 72, 24);
-
+  const baseImg = baseFile ? await loadImage(baseFile) : await createBlankSkin(64, 64);
+  const mapImg = await loadImage(mapFile);
+  const resizedMap = await resizeImage(mapImg, 72, 24);
   const zip = new JSZip();
-  let slot = 27;
 
-  for (let y = 0; y < 3; y++) {
-    for (let x = 0; x < 9; x++) {
-      const tile = cropImage(resizedMap, x * 8, y * 8, 8, 8);
-      const newSkin = pasteHead(baseSkinImg, tile);
-      const blob = await canvasToBlob(newSkin);
-      zip.file(`skin_${slot}.png`, blob);
-      slot--;
-    }
+  for (let i = 0; i < 27; i++) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+
+    ctx.drawImage(baseImg, 0, 0);
+    const sx = (i % 9) * 8;
+    const sy = Math.floor(i / 9) * 8;
+    const face = resizedMap.getContext('2d').getImageData(sx, sy, 8, 8);
+    ctx.putImageData(face, 8, 8);
+
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    const skinIndex = 27 - i;
+    const name = i === 0 ? 'optional_skin.png' : `skin_${skinIndex}.png`;
+    zip.file(name, blob);
   }
 
-  // Optional skin preview
-  const previewCanvas = document.createElement("canvas");
-  previewCanvas.width = 64;
-  previewCanvas.height = 64;
-  const ctx = previewCanvas.getContext("2d");
-  ctx.drawImage(baseSkinImg, 0, 0);
-  ctx.drawImage(resizeImage(mapImg, 64, 24), 0, 0); // top overlay
-  const previewBlob = await canvasToBlob(previewCanvas);
-  zip.file("optional_skin.png", previewBlob);
+  zip.generateAsync({ type: 'blob' }).then(content => {
+    saveAs(content, 'namemc_skinart.zip');
+    document.getElementById('status').textContent = 'Skins generated successfully!';
+  });
+};
 
-  const content = await zip.generateAsync({ type: "blob" });
-  saveAs(content, "NameMC_SkinArt.zip");
-
-  status.textContent = "Done! ZIP downloaded.";
-});
-
-function loadImageFromFile(file) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.src = reader.result;
-    };
-    reader.readAsDataURL(file);
+function loadImage(file) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.src = URL.createObjectURL(file);
   });
 }
 
 function resizeImage(img, width, height) {
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0, width, height);
-  return canvas;
+  return Promise.resolve(canvas);
 }
 
-function cropImage(canvas, x, y, w, h) {
+function createBlankSkin(width, height) {
+  return new Promise(resolve => {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, width, height); // transparent blank
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.src = canvas.toDataURL();
+  });
+}
