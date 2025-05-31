@@ -5,7 +5,11 @@ const gifs = [
   "https://pa1.aminoapps.com/5845/d6890eeb58a89ef075cdfbe7b940b231bec61a49_hq.gif",
   "https://pa1.aminoapps.com/5845/32c70e035bc4ac6802178e43be9066e445095bed_hq.gif",
   "https://i.pinimg.com/originals/e5/a1/7e/e5a17eb79c5472b5fea8ab36282f3696.gif",
-  "https://pa1.aminoapps.com/5845/aa86445c253d52c324bfa0ce378bb049253e7f01_hq.gif"
+  "https://pa1.aminoapps.com/5845/aa86445c253d52c324bfa0ce378bb049253e7f01_hq.gif",
+  "https://pa1.aminoapps.com/5845/3e279f21d4b8e146c8076013eb93613d441d1c4b_hq.gif",
+  "https://i.pinimg.com/originals/99/f4/36/99f43636e89075b308a720bff365b132.gif",
+  "https://i.redd.it/r152bcq4zhv51.gif",
+  "https://i.gifer.com/1toU.gif"
 ];
 
 document.querySelector(".overlay").style.backgroundImage = `url('${gifs[Math.floor(Math.random() * gifs.length)]}')`;
