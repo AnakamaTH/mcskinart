@@ -1,4 +1,3 @@
-
 // Updated random GIF backgrounds (with one removed)
 const gifs = [
   "https://pa1.aminoapps.com/5845/5749d2581b8ff83d442fbee9935fcbc5f0715067_hq.gif",
@@ -13,7 +12,7 @@ const gifs = [
   "https://i.gifer.com/1toU.gif"
 ];
 
-document.querySelector(".overlay").style.backgroundImage = `url('${gifs[Math.floor(Math.random() * gifs.length)]}')`;
+document.querySelector(".overlay").style.backgroundImage = url('${gifs[Math.floor(Math.random() * gifs.length)]}');
 
 document.getElementById('mapInput').addEventListener('change', function () {
   const file = this.files[0];
@@ -79,7 +78,7 @@ document.getElementById('generateBtn').onclick = async () => {
     ctx.putImageData(face, 8, 8);
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-    const name = `skin_${i + 1}.png`;
+    const name = skin_${i + 1}.png;
     zip.file(name, blob);
   }
 
