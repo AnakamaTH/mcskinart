@@ -1,46 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Title of the page -->
-    <title>NameMC SkinArt Generator</title>
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="NameMC SkinArt Generator">
-    <meta property="og:description" content="Generate a NameMC skinart with a picture you choose." />
-    <meta property="og:image" content="https://s.namemc.com/img/favicon-30.png" /> <!-- Link to an image for preview -->
-    <meta property="og:url" content="https://anakamath.github.io/namemcskinartgen" /> <!-- The URL you want to embed -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="NameMC SkinArt Generator" />
-
-</head> 
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NameMC SkinArt Generator</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="NameMC SkinArt Generator" />
+  <meta property="og:description" content="Generate NameMC skinart from your own image!" />
+  <meta property="og:image" content="https://s.namemc.com/img/favicon-30.png" />
+  <meta property="og:url" content="https://anakamath.github.io/namemcskinartgen/" />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <h1>NameMC SkinArt Generator</h1>
 
-    <label>Upload Your Base Skin (64x64):</label>
+    <label>Upload Your Base Skin (64x64):</label><br>
     <input type="file" id="baseSkinInput" accept="image/png"><br><br>
 
-    <label>Upload a Map Image (Any size):</label>
+    <label>Upload Map Image (any size, will be resized):</label><br>
     <input type="file" id="mapInput" accept="image/*"><br><br>
 
-    <button id="generateBtn">Generate</button>
-
-    <div id="status"></div>
+    <button id="generateBtn">Generate SkinArt</button>
+    <p id="status"></p>
   </div>
+
+  <footer style="text-align: center; font-size: 0.8rem; color: #888; margin-top: 50px;">
+    Not affiliated with NameMC.
+  </footer>
 
   <script src="libs/jszip.min.js"></script>
   <script src="libs/FileSaver.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
-
-<footer style="text-align: center; font-size: 0.8rem; color: #888; margin-top: 50px;">
-  Not affiliated with NameMC.
-</footer> 
