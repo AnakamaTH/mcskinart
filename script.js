@@ -12,7 +12,6 @@ const gifs = [
   "https://i.gifer.com/1toU.gif"
 ];
 
-// Shuffle helper
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -21,7 +20,6 @@ function shuffleArray(arr) {
   return arr;
 }
 
-// Store shuffled list in sessionStorage
 if (!sessionStorage.getItem('gifQueue') || JSON.parse(sessionStorage.getItem('gifQueue')).length === 0) {
   sessionStorage.setItem('gifQueue', JSON.stringify(shuffleArray([...gifs])));
 }
@@ -102,7 +100,9 @@ document.getElementById('generateBtn').onclick = async () => {
 
   zip.generateAsync({ type: 'blob' }).then(content => {
     saveAs(content, 'namemc_skinart.zip');
-    status.textContent = 'Skins generated successfully!';
+    status.textContent = 'Skins generated successfully';
     status.classList.add('success');
   });
 };
+
+// Not entirely written by me
